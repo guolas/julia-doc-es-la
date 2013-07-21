@@ -4,7 +4,7 @@
  Comenzando  
 ***********
 
-La instalación de Julia es directa, ya sea utilizando archivos binários pre-compilados, o
+La instalación de Julia es directa, ya sea utilizando archivos binarios precompilados, o
 compilando el código fuente. Baje e instale Julia siguiendo las instrucciones (en inglés)
 en `http://julialang.org/downloads/ <http://julialang.org/downloads/>`_.
 
