@@ -4,12 +4,12 @@
  Comenzando  
 ***********
 
-La instalación de Julia es directa, sea  utilizando arquivos binários pre-compilados, sea
-compilando el código-fuente. Baje e instale Julia siguiendo las 
-instrucciones (em inglés) en `http://julialang.org/downloads/ <http://julialang.org/downloads/>`_.
+La instalación de Julia es directa, ya sea utilizando archivos binários pre-compilados, o
+compilando el código fuente. Baje e instale Julia siguiendo las instrucciones (en inglés)
+en `http://julialang.org/downloads/ <http://julialang.org/downloads/>`_.
 
-La manera más facil de aprender y experimentar con Julia es iniciando una sesión interactiva (também
-conecida como *read-eval-print loop* ou *"repl"* [#REPL-en]_)::
+La manera más fácil de aprender y experimentar con Julia es iniciando una sesión
+interactiva (también conocida como *read-eval-print loop* o *"repl"*)::
 
     $ julia
                    _
@@ -28,45 +28,56 @@ conecida como *read-eval-print loop* ou *"repl"* [#REPL-en]_)::
     3
 
 
-Para cerrar la sesión interactiva, digite ``^D```- la tecla *Ctrl* 
-en conjunto la tecla ``d`` - o digite ``quit()``. Cuando utilize 
-Julia en modo interativo, ``julia`` muestra un *banner* y espera al 
-usuário que digite un comando. Una vez que el usuário digitó el comando,
-como `1 + 2`, y presione *enter*, la sesión interativa calcula la 
-expresión y muestra el resultado. Si una expresión es insertada en una 
-sesión interativa con un punto-y-vírgula al final, su resultado será
-calculado, pero no será mostrado. La varible ``ans`` almacena el resultado 
-de la última expresión calculada, después de haber sido mostrado o no.
+Para cerrar la sesión interactiva, se ha de pulsar ``^D``- la tecla *Ctrl* 
+junto a la tecla ``d`` - o escribir ``quit()`` o ``exit()``. Cuando se utiliza 
+Julia en modo interativo, ``julia`` muestra un *banner* y espera a 
+que el usuario introduzca un comando. Una vez que el usuario ha introducido un comando,
+como ``1 + 2``, y presionado *enter*, la sesión interativa evalúa la 
+expresión y muestra el resultado. Si, en una sesión interactiva, una expresión se
+finaliza con un punto y coma, la expresión se evaluará, pero el resultado no será
+mostrado por pantalla. La varible ``ans`` almacena el resultado 
+de la última expresión evaluada, se haya mostrado o no el resultado.
 
-Para calcular expresiones escritas en un archivo ``file.jl``, luego digite
-``include("file.jl")``.
+Para calcular expresiones escritas en un archivo ``file.jl``, se ha de utilizar
+el comando ``include("file.jl")``.
 
-Para rodar código em um arquivo de maneira não-interativa, você pode
-passar o nome do arquivo como o primeiro argumento na chamada de Julia::
+Para ejecutar el código contenido en un archivo de forma no interactiva, el
+nombre del archivo puede pasarse como primer argumento al ejecutar ``julia``::
 
     $ julia script.jl arg1 arg2...
 
-Como mostra o exemplo, os argumentos da linha de comando subsequentes
-são tomados como argumentos para o programa ``script.jl``, passados na
-constante global ``ARGS``. ``ARGS`` é também definida quando o código
-do *script* é dado usando a opção da linha de comando ``-e`` (veja a 
-saída de ajuda de ``julia`` abaixo). Por exemplo, para apenas imprimir
-os argumentos dados a um *script*, você pode fazer::
+Como sugiere el ejemplo, los siguientes argumentos se utilizan como los argumentos
+para el programa ``script.jl``, pasados en la constante global ARGS. El valor de la
+constante ARGS también se inicializa cuando el código a ejecutar se introduce
+utilizando la opción ``-e`` en la línea de comandos (vea la salida de la ayuda de
+``julia`` más abajo). Por ejemplo, para imprimir los argumentos pasados a un
+*script*, se puede hacer lo siguiente::
 
     $ julia -e 'for x in ARGS; println(x); end' foo bar
     foo
     bar
 
-Ou pode colocar esse código em um *script* e rodá-lo::
+O se puede introducir este código en un *script* y ejecutarlo::
 
     $ echo 'for x in ARGS; println(x); end' > script.jl
     $ julia script.jl foo bar
     foo
     bar
 
-Há várias maneiras de chamar Julia e passar opções, semelhantes
-àquelas disponívels para os programas ``perl`` e ``ruby``::
+Si se require que cierto código se ejecute cada vez que ``julia`` inicie, se
+puede incluir en el fichero ``~\.juliarc.jl``::
 
+	$ echo 'println("Greetings! 你好! 안녕하세요?")' > ~/.juliarc.jl
+	$ julia
+	Greetings! 你好! 안녕하세요?
+	
+	...
+
+Existen múltiples formas de ejecutar código en Julia, y múltiples opciones. De
+forma similar a como se hace en ``perl`` o ``ruby``, la opción ``--help``
+permite mostrar estas opciones::
+
+    $ julia --help
     julia [options] [program] [args...]
      -v --version             Display version information
      -q --quiet               Quiet startup without banner
@@ -89,150 +100,178 @@ Há várias maneiras de chamar Julia e passar opções, semelhantes
      -h --help                Print this message
 
 
-Tutoriais
----------
+Tutoriales
+----------
 
-Alguns guias passo-a-passo estão disponíveis online:
+Se pueden encontrar guías paso a paso online:
 
-- `Começando com Julia para usuários de MATLAB <http://www.ime.unicamp.br/~ra092767/tutoriais/julia/>`_
-- `Forio Julia Tutorials (em inglês) <http://forio.com/julia/tutorials-list>`_
-- `Tutorial for Homer Reid's numerical analysis class (em inglês) <http://homerreid.ath.cx/teaching/18.330/JuliaProgramming.shtml#SimplePrograms>`_
+- `Forio Julia Tutorials (en inglés) <http://forio.com/julia/tutorials-list>`_
+- `Clase sobre análisis numérico de Homer Reid (en inglés) <http://homerreid.ath.cx/teaching/18.330/JuliaProgramming.shtml#SimplePrograms>`_
+- `Vídeos de los tutoriales de Julia en el MIT <http://julialang.org/blog/2013/03/julia-tutorial-MIT/>`_
 
-Diferenças nótáveis em relação ao MATLAB
-----------------------------------------
+Diferencias notables con MATLAB
+-------------------------------
 
-Usuários de MATLAB podem achar a sintaxe de Julia familar, porém Julia
-não é de maneira alguma um clone de MATLAB: há grandes diferenças
-sintáticas e funcionais. Apresentadas a seguir estão algumas 
-importantes ressalvas que podem confundir usuários de Julia 
-acostumados com MATLAB:
+Los usuarios de MATLAB encontrarán familiar la sintaxis de Julia. Sin embargo,
+Julia no es, de ningún modo, un clón de MATLAB, ya que existen importantes
+diferencias sintácticas y funcionales. Las siguientes son algunas de las diferencias
+más notables, que pueden confundir a usuarios acostumbrados al uso de MATLAB::
 
--  *Arrays* são indexados com colchetes, ``A[i,j]``.
--  A unidade imaginária ``sqrt(-1)`` é representada em Julia por
-   ``im``.
--  Múltiplos valores são retornados e atribuídos com parênteses,
-   ``return (a, b)`` e ``(a, b) = f(x)``.
--  Valores são passados e atribuídos por referência. Se uma função 
-   modifica um *array*, as mudanças serão visíveis para quem chamou.
--  Julia tem *arrays* unidimensionais. Vetores-coluna são de tamanho 
-   ``N``, não ``Nx1``. Por exemplo, ``rand(N)`` cria um array 
-   unidimensional.
--  Concatenar escalares e *arrays* com a sintaxe ``[x,y,z]`` concatena
-   na primeira dimensão ("verticalmente"). Para a segunda dimensão,
-   ("horizontalmente"), use espaços, como em ``[x y z]``. Para 
-   construir matrizes em blocos (concatenando nas duas primeiras 
-   dimensões), é usada a sintaxe ``[a b; c d]`` para evitar confusão.
--  Dois-pontos ``a:b`` e ``a:b:c`` constroem objetos ``Range``. Para 
-   construir um vetor completo, use ``linspace``, ou "concatene" o
-   intervalo colocando-o em colchetes, ``[a:b]``.
--  Funções retornam valores usando a palavra-chave ``return``, ao 
-   invés de por citações a seus nomes na definição da função (veja
-   :ref:`man-return-keyword` para mais detalhes).
--  Um arquivo pode conter um número qualquer de funções, e todas as 
-   definições vão ser visíveis de fora quando o arquivo for carregado.
--  Reduções como ``sum``, ``prod``, e ``max`` são feitas sobre cada 
-   elemento de um *array* quando chamadas com um único argumento, como
-   em ``sum(A)``.
--  Funções como ``sort`` que operam por padrão em colunas
-   (``sort(A)`` é equivalente a ``sort(A,1)``) não possuem 
-   comportamento especial para *arrays* 1xN; o argumento é retornado
-   inalterado, já que a operação feita foi ``sort(A,1)``. Para ordenar
-   uma matriz 1xN como um vetor, use ``sort(A,2)``.
--  Parênteses devem ser usados para chamar uma função com zero 
-   argumentos, como em``tic()`` and ``toc()``.
--  Não use ponto-e-vírgula para encerrar declarações. Os resultados 
-   de declarações não são automaticamente impressos (exceto no prompt 
-   interativo), e linhas de código não precisam terminar com 
-   ponto-e-vírgula. A função ``println`` pode ser usada para imprimir 
-   um valor seguido de uma nova linha.
--  Se ``A`` e ``B`` são *arrays*, ``A == B`` não retorna um *array* de
-   booleanos. Use ``A .== B`` no lugar. O mesmo vale para outros 
-   operaores booleanos, ``<``, ``>``, ``!=``, etc.
--  Os elementos de uma coleção podem ser passados como argumentos para
-   uma função usando ``...``, como em ``xs=[1,2]; f(xs...)``.
--  A função ``svd`` de Julia retorna os valores singulares como um
-   vetor, e não como uma matriz diagonal.
+- Los *arrays* son indexados usando corchetes, ``A[i,j]``.
 
-Diferenças notáveis em relação a R
-----------------------------------
+- La unidad imaginaria ``sqrt(-1)`` se representa en Julia con ``im``.
 
-Um dos objetivos de Julia é providenciar uma linguagem eficiente para
-análise de dados e programação estatística. Para usuários de Julia 
-vindos de R, estas são algumas diferenças importantes:
+- La devolución y asignación de múltiples valores de forma simultánea se realiza
+  con paréntesis, ``return (a, b)`` y ``(a, b) = f(x)``.
 
-- Julia usa ``=`` para atribuição. Julia não provê nenhum outro 
-  operador alternativo, como ``<-`` ou ``<-``.
-- Julia constrói vetores usando colchetes. O ``[1, 2, 3]`` de Julia é
-  o equivalente do ``c(1, 2, 3)`` de R.
-- As operações matriciais de Julia são mais parecidas com a notação
-  matemática tradicional do que as de R. Se ``A`` e ``B`` são matrizes,
-  então ``A * B`` define a multiplicação de matrizes em Julia 
-  equivalente à ``A %*% B`` de R. Em R, essa notação faria um produto
-  de Hadamard (elemento a elemento). Para obter a multiplicação 
-  elemento a elemento em Julia, você deve escrever ``A .* B``.
-- Julia transpõe matrizes usando o operador ``'``. O ``A'`` em Julia é
-  então equivalente ao ``t(A)`` de R.
-- Julia não requer parênteses ao escrever condições ``if`` ou loops 
-  ``for``: use ``for i in [1, 2, 3]`` no lugar de ``for (i in c(1, 2, 3))``
-  e ``if i == 1`` no lugar de ``if (i == 1)``.
-- Julia não trata os números ``0`` e ``1`` como booleanos. Você não
-  pode escrever ``if (1)`` em Julia, porque condições ``if` só aceitam
-  booleanos. No lugar, escreva ``if true``.
-- Julia não provê funções ``nrow`` e ``ncol``. Use ``size(M, 1)`` no 
-  lugar de ``nrow(M)`` e ``size(M, 2)`` no lugar de ``ncol(M)``.
-- A SVD de Julia não é reduzida por padrão, diferentemente de R. Para
-  obter resultados semelhantes aos de R, você deverá chamar ``svd(X, true)``
-  em uma matrix ``X``.
-- Julia é uma linguagem muito cautelosa em distinguir escalares, 
-  vetores e matrizes. Em R, ``1`` e ``c(1)`` são iguais. Em Julia, 
-  eles não podem ser usados um no lugar do outro. Uma consequência
-  potencialmente confusa é que ``x' * y`` para vetores ``x`` e ``y``
-  é um vetor de um elemento, e não um escalar. Para obter um escalar,
-  use ``dot(x, y)``.
-- As funções ``diag()`` e ``diagm()`` de Julia não são parecidas com 
-  as de R.
-- Julia não pode atribuir os resultados de chamadas de funções no lado
-  esquerdo de uma operação: você não pode escrever ``diag(M) = ones(n)``
-- Julia desencoraja popular o *namespace* principal com funções. A 
-  maior parte das funcionalidades estatísticas para Julia é encontrada
-  em `pacotes <http://docs.julialang.org/en/latest/packages/packagelist/>`_ 
-  como o `DataFrames` e o `Distributions`.
-	- Funções de distribuições são encontradas no `pacote Distributions <https://github.com/JuliaStats/Distributions.jl>`_
-	- O `pacote DataFrames <https://github.com/HarlanH/DataFrames.jl>`_ provê *data frames*.
-	- Fórmulas para GLM devem ser escapadas: use ``:(y ~ x)`` no lugar de ``y ~ x``.
-- Julia provê enuplas e tabelas de espalhamento reais, mas as listas
-  de R. Quando precisar retornar múltiplos itens, você tipicamente 
-  deverá utilizar uma tupla: ao invés de ``list(a = 1, b = 2)``, use 
-  ``(1, 2)``. 
-- Julia encoraja a todos usuários escreverem seus próprios tipos. Os
-  tipos de Julia são bem mais fáceis de se usar do que os objetos S3
-  ou S4 de R. O sistema de *multiple dispatch* de Julia significa que
-  ``table(x::TypeA)`` e ``table(x::TypeB)`` agem como ``table.TypeA(x)``
-  e ``table.TypeB(x)`` em R.
-- Em Julia, valores são passados e atribuídos por referência. Se uma
-  função modifica um *array*, as mudanças serão visíveis no lugar de
-  chamada.  Esse comportamento é bem diferente do de R, e permite que
-  novas funções operem em grandes estruturas de dados de maneira muito
-  mais eficiente.
-- Concatenação de vetores e matrizes é feita usando ``hcat`` e ``vcat``,
-  não ``c``, ``rbind`` e ``cbind``.
-- Um objeto ``Range`` ``a:b`` em Julia não é uma forma abreviada de um
-  vetor como em R, mas sim um tipo especializado de objeto que é 
-  utilizado para iteração sem muito gasto de memória. Para um converter
-  um ``Range`` em um vetor, você precisa cercá-lo por colchetes: ``[a:b]``.
-- Julia tem várias funções que podem alterar seus argumentos. For 
-  exemplo, há tanto ``sort(v)`` quanto ``sort!(v)``.
-- Em R, eficiência requer vetorização. Em Julia, quase o contrário é
-  verdadeiro: o código mais eficiente é frequentemente o desvetorizado.
-- Diferentemente de R, não há avaliação preguiçosa [#Del-pt]_ [#Del-en]_
-  em Julia. Para a maioria dos usuários, isso significa que há poucas
-  expressões ou nomes de coluna sem aspas.
-- Julia não possui tipo ``NULL``.
-- Não há equivalente do ``assign`` ou ``get`` de R em Julia.
+- Los valores se pasan por referencia. Si una variable de entrada de una función
+  se modifica en el interior, los cambios serán visibles desde donde se invocó la
+  función.
 
+- Julia tiene *arrays* unidimensionales. Los vectores columna son de tamaño ``N``
+  y no ``Nx1``. Por ejemplo, ``randn(N)`` crea un *array* unidimensional.
 
-.. rubric:: Notas de rodapé
+- La concatenación de escalares y *arrays* utilizando la sintaxis ``[x, y, z]``
+  concatena en la primera dimensión ("verticalmente"). Para que la concatenación
+  sea en la segunda dimensión ("horizontalmente"), se ha de utilizar espacios,
+  ``[x y z]``. Para construir matrices por bloques (mediante la concatenación en
+  las dos primeras dimensiones), se utiliza la sintaxis ``[a b; c d]`` para
+  evitar confusiones.
 
-.. [#REPL-en] http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop
-.. [#Del-pt] http://pt.wikipedia.org/wiki/Avalia%C3%A7%C3%A3o_pregui%C3%A7osa
-.. [#Del-en] http://en.wikipedia.org/wiki/Lazy_evaluation
+- Los dos puntos en ``a:b`` y en ``a:b:c`` crean objectos del tipo ``Range``.
+  Para construir un *array*, se ha de utilizar ``linspace`` o "concatenar" el
+  rango escribiéndolo entre corchetes, ``[a:b]``.
+
+- Las funciones devuelven valores mediante la palabra reservada ``return``, en
+  vez de indicando los nombres de las variables a devolver en la definición de
+  la función (ver :ref:`man-return-keyword` para más información).
+
+- Un archivo puede contener cualquier número de funciones, y todas ellas serán
+  accesibles una vez se haya cargado el archivo.
+
+- Reducciones como ``sum``, ``prod`` y ``max`` se realizan sobre todos y cada
+  uno de los elementos de un *array* cuando se invocan con único argumento,
+  como en ``sum(A)``.
+
+- Funciones como ``sort``, que operan por columnas por defecto (``sort(A)``
+  equivale a ``sort(A, 1)``), no tienen ningún comportamiento especial para 
+  arrays de dimensiones ``1xN``; el argumento se devuelve sin modificaciones,
+  puesto que ejecuta ``sort(A, 1)``. Para que funcione en un *array* de
+  dimensiones ``1xN`` como en un vector de ``Nx1``, se ha de ejecutar como
+  ``sort(A, 2)``.
+
+- Los paréntesis se han de utilizar incluso para invocar una función sin
+  parámetros, como es el caso de ``tic()`` y ``toc()``.
+
+- El punto y coma no es necesario al final de cada cláusula. El resultado
+  de una cláusula no se muestra (excepto cuando Julia se ejecuta en modo
+  interactivo), y las líneas de código no tienen por qué acabarse con un punto
+  y coma. Se puede emplear la función ``println`` para imprimir un valor
+  seguido de un salto de línea.
+
+- Si ``A`` y ``B`` son *arrays*, ``A == B`` no devuelve un *array* de booleanos.
+  Para conseguir este funcionamiento, se ha de emplear ``A .== B``. Otros
+  operadores booleanos, como ``<``, ``>``, ``!=``, se comportan de la misma
+  manera.
+
+- Los elementos de una colección pueden pasarse como parámetros a una función
+  utilizando ``...``, como en ``xs=[1,2]; f(xs...)``.
+
+- La función ``svd`` en Julia devuelve los valores singulares como un vector
+  en vez de como una matriz diagonal.
+
+Diferencias notables con R
+--------------------------
+
+Uno de los objetivos de Julia es proporcionar un lenguaje efectivo para el análisis
+de datos y la programación estadística. Para usuarios que vengan a Julia desde R,
+éstas son algunas de las diferencias más importantes::
+
+- Julia usa ``=`` para la asignación. Julia no proporciona ningún otro operador
+  como ``<-`` o ``<<-``.
+
+- Julia construye los vectores utilizando corchetes. ``[1, 2, 3]`` en Julia es
+  equivalente a ``c(1, 2, 3)`` en R.
+
+- Las operaciones con matrices de Julia son más parecidas a la notación matricial
+  tradicional que a la de R. Si ``A`` y ``B`` son matrices, entonces ``A * B``
+  representa la multiplicación de matrices equivalente a ``A %*% B`` en R. En R,
+  esta notación realizaría una multiplicación elemento a elemento, o producto
+  de Hadamard. Para obtener la multiplicación elemento a elemento en Julia, se
+  ha de hacer ``A .* B``.
+
+- La trasposición de matrices en Julia se realiza mediante el operador ``'``.
+  ``A'`` en Julia equivale, por tanto, a ``t(A)`` en R.
+
+- Julia no necesita los paréntesis en las cláusulas ``if`` o en los bucles
+  ``for``: se ha de usar ``for i in [1, 2, 3]`` en lugar de ``for (i in c(1, 2, 3))``
+  e ``if i == 1`` en vez de ``if (i == 1)``.
+
+- Julia no trata los números ``0`` y ``1`` como booleanos. No se puede escribir
+  ``if (1)`` en Julia, porque la cláusula ``if`` sólo acepta valores lógicos. En
+  su lugar, se puede utilizar ``if true``.
+
+- Julia no ofrece funciones ``nrow`` o ``ncol``. Se ha de emplear ``size(M, 1)``
+  en lugar de ``nrow(M)`` y ``size(M, 2)`` en lugar de ``ncol(M)``.
+
+- La SVD en Julia no es reducida, por defecto, a diferencia de en R. Para obtener
+  resultados similares a los que proporciona R, en general habrá que ejecutar
+  ``svd(X, true)`` en una matriz ``X``.
+
+- Julia es un lenguaje muy estricto en la distinción entre escalares, vectores
+  y matrices. En R, ``1`` y ``c(1)`` son lo mismo. En Julia esto no es así. Esto
+  puede dar lugar a confusiones como que ``x' * y``, cuando ``x`` e ``y`` son
+  vectores, da como resultado un vector con un único elemento, y no un escalar. Para
+  obtener un escalar sería necesario ejecutar ``dot(x, y)``.
+
+- Las funciones ``diag()`` y ``diagm()`` en Julia no son lo mismo que en R.
+
+- No se puede asignar al resultado de una función en el término a la izquierda
+  del igual en una asignación: no se puede escribir ``diag(M) = ones(n)``.
+   
+- Julia desaconseja ocupar el *namespace* principal con funciones. La mayoría de
+  las funciones estadísticas en Julia se pueden encontrar en `paquetes <http://docs.julialang.org/en/latest/packages/packagelist/>`_
+  como DataFrames y Distributions::
+
+  - Funciones de distribución se pueden encontrar en el `paquete Distributions <https://github.com/JuliaStats/Distributions.jl>`_
+	
+  - El `paquete DataFrames <https://github.com/HarlanH/DataFrames.jl>`_ proporciona *data frames*.
+
+  - Fórmulas para GLM se deben de escapar: se ha de utilizar  ``:(y ~ x)`` en lugar de ``y ~ x``.
+
+- Julia proporciona tuplas y tablas *hash* reales, pero no las listas de R. Para
+  devolver múltiples elementos, típicamente se ha de utilizar una tupla: en vez
+  de ``list(a = 1, b = 2)`` se ha de utilizar ``(1, 2)``.
+
+- Julia promueve que todos los usuarios definan sus propios tipos. Los tipos
+  en Julia son mucho más sencillos de utilizar que los objetos S3 o S4 en R. El
+  sistema de *multiple dispatch* de Julia permite que ``table(x::TypeA)`` y ``table(x::TypeB)``
+  sean equivalentes a ``table.TypeA(x)`` y ``table.TypeB(x)`` en R.
+
+- En Julia los valores se pasan y se asignan por referencia. Si una variable de
+  entrada de una función se modifica en el interior, los cambios serán visibles
+  desde donde se invocó la función. Esto es muy diferente a cómo funciona R, y
+  permite que nuevas funciones operen con estructuras de datos de gran tamaño de
+  forma eficiente.
+
+- La concatenación de vectores y matrices se realiza con ``hcat`` y ``vcat``, y
+  no con ``c``, ``rbind`` y ``cbind``.
+
+- Un objecto ``Range`` ``a:b`` en Julia no es un atajo para crear un vector,
+  como en R, sino que es un tipo de objecto especial que se emplea para realizar
+  iteraciones sin requerir mucha memoria. Para convertir un ``Range`` en un
+  vector, es preciso escribirlo entre corchetes ``[a:b]``.
+  
+- Julia tiene algunas funciones que son capaces de modificar los argumentos. Por
+  ejemplo existe ``sort(v)`` y ``sort!(v)``.
+
+- En R, eficiencia requiere vectorización. En Julia, casi lo contrario es cierto:
+  en general el código desempeña mejor cuando utiliza bucles no vectorizados.
+
+- A diferencia de R, no hay ejecución retardada en Julia. Para la mayor parte de
+  los usuarios esto significa qeu hay muy pocas expresiones o nombres de columnas
+  sin comillas.
+
+- Julia no soporta el tipo ``NULL``.
+
+- En Julia no hay equivalente a las funciones ``assign`` o ``get`` en R.
